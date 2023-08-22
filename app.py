@@ -36,21 +36,13 @@ def add_photographer():
     )
     return jsonify(success=True, id=photographer.id)
 
-@app.route('/photographer/<int:photographer_id>', methods=['GET'])
+
+@app.route('/photographers', methods=['GET'])
 @db_session
-def get_photographer(photographer_id):
-    photographer = Photographer.get(id=photographer_id)
-    if photographer is None:
-        return {"error": "Photographer not found"}, 404
-    return jsonify(
-        id=photographer.id,
-        first_name=photographer.first_name,
-        last_name=photographer.last_name,
-        experience=photographer.experience,
-        equipment=photographer.equipment,
-        phone=photographer.phone,
-        email=photographer.email
-    )
+def get_photographers():
+    photographers = select(p for p in Photographer)[:]
+    photographers_list = [p.to_dict() for p in photographers]
+    return jsonify(photographers_list)
 
 @app.route('/photographer/<int:photographer_id>', methods=['PUT'])
 @db_session
@@ -76,16 +68,8 @@ def delete_photographer(photographer_id):
     photographer.delete()
     return jsonify(success=True)
 
-@app.route('/photographers', methods=['GET'])
-@db_session
-def get_photographers():
-    photographers = select(p for p in Photographer)[:]
-    photographers_list = [p.to_dict() for p in photographers]
-    return jsonify(photographers_list)
 
-@app.route('/')
-def home():
-    return render_template('home.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)

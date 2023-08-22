@@ -1,6 +1,27 @@
 # Phototracker-pis
 
-Phototracker
+My project will enable an advertising agency to more easily track photographers. It will allow them to create their ads with the photographer's first name and last name, level of experience, equipment, phone, and email. They will be able to create, view, update, and delete photographer information.
 
-Moj projekt će omogućiti nekoj agenciji za oglašavanje fotografa lakše praćenje istih.
-Omogućiti će im stvaranje njihovog oglasa sa imenom i prezimenom, razinom iskustva, opremom, telefonom i mailom. Moći će kreirati, pregledavati, ažurirati i brisati podatke o fotografima.
+## Features
+
+-Add a new photographer
+-See all pgotographers
+-Edit photographer
+-Delete photographer
+
+## Running the Backend
+
+Application is run by docker
+
+#### Creating a docker image
+
+```sh
+cd Phototracker-pis
+docker build -t phototracker -f ./Dockerfile .
+```
+
+#### Running the docker image
+
+```sh
+docker run -p 5000:5000 phototracker
+```
