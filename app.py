@@ -3,9 +3,9 @@ from pony.orm import Database, Required, PrimaryKey, db_session, select
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)  # enabling CORS
+CORS(app)  
 
-# Connect to a SQLite database file
+
 db = Database()
 db.bind(provider='sqlite', filename='database.sqlite', create_db=True)
 
@@ -20,7 +20,6 @@ class Photographer(db.Entity):
 
     
 
-# Generate the database table if it doesn't exist
 db.generate_mapping(create_tables=True)
 
 @app.route('/photographer', methods=['POST'])
